@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>SPORT ONLINE</title>
+    <title>{{ $title }}</title>
     @include('includes.app.style')
 </head>
 
@@ -19,9 +19,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="product.html">Product</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="login.html">Login</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/') }}">Home</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/products') }}">Product</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/login') }}">Login</a></li>
                 </ul>
             </div>
         </div>
