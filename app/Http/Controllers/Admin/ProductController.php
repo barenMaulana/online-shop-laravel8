@@ -61,7 +61,7 @@ class ProductController extends Controller
             $product->product_image = $path;
             $product->save();
         }
-        $request->session()->flash('status', 'Task was successful!');
+        $request->session()->flash('status', 'sukses menambah produk!');
         return redirect()->to(url('admin/products'));
     }
 
@@ -138,8 +138,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id, Request $request)
     {
-        //
+        if (Product::where('id', $id)->delete()) {
+            $request->session()->flash('status', 'sukses update!');
+            return redirect()->to(url('admin/products'));
+        } else {
+            $request->session()->flash('status', 'gagal update!');
+            return redirect()->to(url('admin/products'));
+        }
     }
 }

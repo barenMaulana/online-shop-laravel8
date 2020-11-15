@@ -20,4 +20,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/products/detail/{id}', [ProductController::class, 'show']);
     Route::get('/products/edit/{id}', [ProductController::class, 'edit']);
     Route::PUT('/products/update/{id}', [ProductController::class, 'update']);
+    Route::post('/products/delete/{id}', [ProductController::class, 'destroy']);
 });

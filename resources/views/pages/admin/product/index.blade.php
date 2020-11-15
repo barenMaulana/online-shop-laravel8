@@ -1,5 +1,15 @@
 @extends('layouts.Admin')
 @section('content')
+@if (session()->has('status'))    
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-success">
+                {{ session()->get('status') }}
+            </div>
+        </div>
+    </div>
+@endif
+
 <div class="row my-2">
     <div class="col">
     <a href="{{ url('admin/products/create') }}"><i class="fa fa-plus"></i> produk baru</a>
@@ -28,7 +38,10 @@
                 <td class="d-flex justify-content-around">
                     <a href="{{ url('admin/products/detail/'.$product->id) }}" class="mx-1"><i class="fa fa-eye"></i></a>
                     <a href="{{ url('admin/products/edit/'.$product->id) }}" class="mx-1"><i class="fa fa-pencil-alt"></i></a>
-                    <a href="" class="mx-1"><i class="fa fa-trash"></i></a>
+                    <form action="{{ url('admin/products/delete/'.$product->id) }}" method="post">
+                        @csrf
+                        <div class="mx-1"><button type="submit" onclick="return confirm('data akan terhapus')" class="fa fa-trash" style="border:none;color:red"></button></div>
+                    </form>
                 </td>
             <tr>
             @endforeach
