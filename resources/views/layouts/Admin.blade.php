@@ -55,7 +55,7 @@
                     <ul id="sidebarnav">
                         <li>
                             <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="{{ url('/frontend/assets/img/users/1.jpg') }}" alt="users"
+                                <div class="user-pic"><img src="{{ url('/frontend/assets/img/users/4.jpg') }}" alt="users"
                                         class="rounded-circle" width="40" /></div>
                                 <div class="user-content hide-menu m-l-10">
                                     <a href="javascript:void(0)" class="" id="Userdd" role="button"
@@ -100,6 +100,9 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                    @if (isset($breadCrumb))
+                                    <li class="breadcrumb-item"><a href="#">{{ $breadCrumb }}</a></li>
+                                    @endif
                                 </ol>
                             </nav>
                         </div>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -15,7 +17,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'sportline | products',
+            'breadCrumb' => 'products',
+            'products' => DB::table('products')->simplePaginate(15)
+        ];
+        return view('pages.admin.product.index', $data);
     }
 
     /**
@@ -25,7 +32,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'sportline | produk baru'
+        ];
+        return view('pages.admin.product.create', $data);
     }
 
     /**
@@ -34,9 +44,24 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {
-        //
+        $validated = $request->validated();
+        if ($validated['product_image']->isValid()) {
+            $extension = $validated['product_image']->extension();
+            $fileName = time() . $extension;
+            $path = $request->product_image->store('product', 'public');
+
+            $product = new Product;
+            $product->product_name = $request->product_name;
+            $product->product_price = $request->product_price;
+            $product->product_qty = $request->product_qty;
+            $product->product_description = $request->product_description;
+            $product->product_image = $path;
+            $product->save();
+        }
+        $request->session()->flash('status', 'Task was successful!');
+        return redirect()->to(url('admin/products'));
     }
 
     /**

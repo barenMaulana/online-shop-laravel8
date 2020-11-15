@@ -3,21 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\Admin;
+use App\Http\Controllers\Admin\ProductController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+// front page
 Route::get('/', [AppController::class, 'index']);
 Route::get('/products', [AppController::class, 'products']);
 
+// admin page
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [Admin::class, 'index']);
+
+    //product
+    Route::get('/products', [ProductController::class, 'index']);
+    Route::get('/products/create', [ProductController::class, 'create']);
+    Route::post('/products/store', [ProductController::class, 'store']);
 });
