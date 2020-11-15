@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProduct;
+use App\Http\Requests\UpdateProduct;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class ProductController extends Controller
         $data = [
             'title' => 'sportline | products',
             'breadCrumb' => 'products',
-            'products' => DB::table('products')->simplePaginate(15)
+            'products' => DB::table('products')->simplePaginate(5)
         ];
         return view('pages.admin.product.index', $data);
     }
@@ -48,8 +49,8 @@ class ProductController extends Controller
     {
         $validated = $request->validated();
         if ($validated['product_image']->isValid()) {
-            $extension = $validated['product_image']->extension();
-            $fileName = time() . $extension;
+            // $extension = $validated['product_image']->extension();
+            // $fileName = time() . $extension;
             $path = $request->product_image->store('product', 'public');
 
             $product = new Product;
@@ -86,9 +87,15 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $data = [
+            'product' => Product::find($id),
+            'breadCrumb' => 'edit',
+            'title' => 'sportline | edit'
+        ];
+
+        return view('pages.admin.product.edit', $data);
     }
 
     /**
@@ -98,9 +105,31 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProduct $request, $id)
     {
-        //
+        $validated = $request->validated();
+        $path = '';
+        if (isset($validated['product_image'])) {
+            $path = $request->product_image->store('product', 'public');
+        } else {
+            $path = $validated['old_pict'];
+        }
+
+        if (Product::where('id', $id)
+            ->update([
+                'product_name' => $validated['product_name'],
+                'product_price' => $validated['product_price'],
+                'product_qty' => $validated['product_qty'],
+                'product_description' => $validated['product_description'],
+                'product_image' => $path,
+            ])
+        ) {
+            $request->session()->flash('status', 'gagal update!');
+            return redirect()->to(url('admin/products'));
+        } else {
+            $request->session()->flash('status', 'sukses update!');
+            return redirect()->to(url('admin/products'));
+        }
     }
 
     /**

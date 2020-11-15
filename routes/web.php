@@ -18,4 +18,6 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products/store', [ProductController::class, 'store']);
     Route::get('/products/detail/{id}', [ProductController::class, 'show']);
+    Route::get('/products/edit/{id}', [ProductController::class, 'edit']);
+    Route::PUT('/products/update/{id}', [ProductController::class, 'update']);
 });
