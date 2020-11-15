@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\Admin\Admin;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,7 @@ use App\Http\Controllers\AppController;
 
 Route::get('/', [AppController::class, 'index']);
 Route::get('/products', [AppController::class, 'products']);
+
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/', [Admin::class, 'index']);
+});

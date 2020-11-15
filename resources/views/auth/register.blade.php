@@ -5,8 +5,6 @@
 <div class="col-md-8">
     <div class="card border-0 shadow rounded">
         <div class="card-body">
-            <h4 class="font-weight-bold">REGISTER</h4>
-            <hr>
             <form action="{{ route('register') }}" method="POST">
                 @csrf
 
@@ -14,8 +12,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="font-weight-bold text-uppercase">Full Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror" placeholder="Masukkan Nama Lengkap">
+                            <label>Full Name</label>
+                            <input type="text" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
                             @error('name')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
@@ -26,8 +24,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="font-weight-bold text-uppercase">Email address</label>
-                            <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="Masukkan Alamat Email">
+                            <label>Email address</label>
+                            <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror">
                             @error('email')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
@@ -38,8 +36,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="font-weight-bold text-uppercase">Password</label>
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
                             @error('password')
                                 <div class="alert alert-danger mt-2">
                                     {{ $message }}
@@ -50,14 +48,14 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="font-weight-bold text-uppercase">Konfirmasi Password</label>
-                            <input type="password" name="password_confirmation" class="form-control" placeholder="Masukkan Konfirmasi Password">
+                            <label>password confirm</label>
+                            <input type="password" name="password_confirmation" class="form-control">
                         </div>
                     </div>
 
                 </div>
                 
-                <button type="submit" class="btn btn-primary">REGISTER</button>
+                <button type="submit" class="btn-sm btn-custom-login">REGISTER</button>
             </form>
         </div>
     </div>

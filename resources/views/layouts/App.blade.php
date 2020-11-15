@@ -21,8 +21,18 @@
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/') }}">Home</a></li>
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/products') }}">Product</a></li>
+                @guest
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ url('/login') }}">Login</a></li>
-                </ul>
+                @endguest
+                @auth
+                <li class="nav-item" type="submit">
+                    <form action="{{ route('logout') }} " method="POST">
+                     @csrf
+                     <button type="submit" class="btn btn-sm" style="margin-top: 7%">Logout</button>
+                    </form>
+                </li>
+                @endauth
+            </ul>
             </div>
         </div>
     </nav>
