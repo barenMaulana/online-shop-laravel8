@@ -26,7 +26,7 @@
                 <td>{{ number_format($product->product_price) }}</td>
                 <td>{{ $product->product_qty }}</td>
                 <td class="d-flex justify-content-around">
-                    <a href="" class="mx-1"><i class="fa fa-eye"></i></a>
+                <a href="{{ url('admin/products/detail/'.$product->id) }}" class="mx-1"><i class="fa fa-eye"></i></a>
                     <a href="" class="mx-1"><i class="fa fa-pencil-alt"></i></a>
                     <a href="" class="mx-1"><i class="fa fa-trash"></i></a>
                 </td>

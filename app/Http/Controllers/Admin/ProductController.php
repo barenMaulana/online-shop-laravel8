@@ -70,9 +70,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $data = [
+            'title' => 'sportline | detail',
+            'product' => Product::find($id),
+            'breadCrumb' => 'Detail'
+        ];
+        return view('pages.admin.product.show', $data);
     }
 
     /**
