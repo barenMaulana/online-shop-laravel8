@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
 
 // front page
 Route::get('/', [AppController::class, 'index']);
@@ -13,7 +14,7 @@ Route::get('/products', [AppController::class, 'products']);
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [Admin::class, 'index']);
 
-    //product
+    // products
     Route::get('/products', [ProductController::class, 'index']);
     Route::get('/products/create', [ProductController::class, 'create']);
     Route::post('/products/store', [ProductController::class, 'store']);
@@ -21,4 +22,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/products/edit/{id}', [ProductController::class, 'edit']);
     Route::PUT('/products/update/{id}', [ProductController::class, 'update']);
     Route::post('/products/delete/{id}', [ProductController::class, 'destroy']);
+
+    //  users
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users/edit/{id}', [UserController::class, 'edit']);
+    Route::PUT('/users/update/{id}', [UserController::class, 'update']);
+    Route::post('/users/delete/{id}', [UserController::class, 'destroy']);
 });
