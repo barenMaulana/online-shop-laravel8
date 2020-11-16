@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class AppController extends Controller
 {
@@ -18,6 +19,7 @@ class AppController extends Controller
     {
         $data = [
             'title' => 'sportline | product',
+            'products' => Product::all()
         ];
         return view('pages.products', $data);
     }

@@ -87,6 +87,11 @@
                     <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/transactions') }}"
                                 aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
                                     class="hide-menu">transactions</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/cart') }}"
+                                aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
+                                    class="hide-menu">keranjang</span></a></li>
+                    <li class="sidebar-item"> <a class="sidebar-link bg-primary" href="{{ url('/products') }}"
+                                aria-expanded="false"><span class="hide-menu mx-auto text-white"><h4 class="mt-2">Belanja yuk</h4></span></a></li>
                     </ul>
                 </nav>
             </div>

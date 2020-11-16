@@ -5,12 +5,13 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\Admin\Admin;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\TransactionController;
 
 // front page
 Route::get('/', [AppController::class, 'index']);
 Route::get('/products', [AppController::class, 'products']);
 
-// admin page
+// admin group
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', [Admin::class, 'index']);
 
@@ -28,4 +29,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/users/edit/{id}', [UserController::class, 'edit']);
     Route::PUT('/users/update/{id}', [UserController::class, 'update']);
     Route::post('/users/delete/{id}', [UserController::class, 'destroy']);
+
+    //  transaction
+    Route::get('/transactions', [TransactionController::class, 'index']);
+    Route::post('/transactions/store', [TransactionController::class, 'store']);
+    Route::post('/transactions/delete/{id}', [TransactionController::class, 'destroy']);
+    Route::get('/transactions/hapus-belanja/{id}', [TransactionController::class, 'hapusBelanja']);
+
+    //  cart
+    Route::get('/cart', [TransactionController::class, 'cart']);
 });

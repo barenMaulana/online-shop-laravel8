@@ -15,45 +15,31 @@
             </div>
 
             <div class="row">
-                <div class="col-12 col-lg-4 my-1">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ url('/frontend/assets/img/sepatu1.png') }}" alt="Card image cap">
+                @foreach ($products as $product)
+                <div class="col-12 col-lg-3 my-4">
+                    <div class="card mx-auto" style="width: 17rem;">
+                        <img class="card-img-top" src="{{ asset('storage/'.$product->product_image) }}" alt="Card image cap">
                         <div class="card-body">
                             <hr>
-                            <h5 class="card-title">Nike shoes</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                            <h5 class="card-title">{{ $product->product_name }}</h5>
+                            <p class="card-text" style="height: 100px;overflow:auto;font-size:12px">{{ $product->product_description }}</p>
                             <hr>
-                            <a href="#" class="btn-sm btn-custom-card-product">BELI</a>
+                            @auth
+                            <form action="{{ url('admin/transactions/store') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                                <input type="hidden" name="product_name" value="{{ $product->product_name }}">
+                                <input type="hidden" name="product_price" value="{{ $product->product_price }}">
+                                <button class="btn-sm btn-custom-card-product" style="width: 100%">tambah<i class="fa fa-shopping-cart"></i></button>
+                            </form>
+                            @endauth
+                            @guest
+                                <a href="{{ url('register') }}" class="btn-sm btn-custom-card-product">BELI</a>
+                            @endguest
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-4 my-1">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ url('/frontend/assets/img/sepatu1.png') }}" alt="Card image cap">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title">Nike shoes</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <hr>
-                            <a href="#" class="btn-sm btn-custom-card-product">BELI</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4 my-1">
-                    <div class="card mx-auto" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ url('/frontend/assets/img/sepatu1.png') }}" alt="Card image cap">
-                        <div class="card-body">
-                            <hr>
-                            <h5 class="card-title">Nike shoes</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <hr>
-                            <a href="#" class="btn-sm btn-custom-card-product">BELI</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
