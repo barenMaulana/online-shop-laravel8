@@ -18,7 +18,7 @@
                 @foreach ($products as $product)
                 <div class="col-12 col-lg-3 my-4">
                     <div class="card mx-auto" style="width: 17rem;">
-                        <img class="card-img-top" src="{{ asset('storage/'.$product->product_image) }}" alt="Card image cap">
+                        <img class="card-img-top" src="{{ asset('storage/'.$product->product_image) }}" height="230" alt="Card image cap">
                         <div class="card-body">
                             <hr>
                             <h5 class="card-title">{{ $product->product_name }}</h5>

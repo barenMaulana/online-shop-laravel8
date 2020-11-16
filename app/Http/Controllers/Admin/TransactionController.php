@@ -44,6 +44,13 @@ class TransactionController extends Controller
      */
     public function store(TransactionStore $request)
     {
+        $url = '';
+        if (auth()->user()->roles == 'ADMIN') {
+            $url = 'admin/transactions';
+        } else {
+            $url = 'admin/cart';
+        }
+
         $validated = $request->validated();
         if (Transaction::insert([
             'user_id' => $validated['user_id'],
@@ -51,10 +58,10 @@ class TransactionController extends Controller
             'product_price' => $validated['product_price']
         ])) {
             session()->flash('status', 'Pesanan baru!');
-            return redirect()->to(url('admin/transactions'));
+            return redirect()->to(url($url));
         } else {
             session()->flash('status', 'Gagal pesan produk!');
-            return redirect()->to(url('admin/transactions'));
+            return redirect()->to(url($url));
         }
     }
 

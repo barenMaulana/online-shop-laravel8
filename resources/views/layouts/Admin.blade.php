@@ -28,7 +28,7 @@
                         </b>
                         <span class="logo-text">
                             <img src="{{ url('/frontend/assets/img/logo-text.png') }}" alt="homepage" class="dark-logo" />
-                            <img src="{{ url('/frontend/assets/img/logo-light-text.png') }}" class="light-logo" alt="homepage" />
+                            <h5 class="mt-2">SportLine</h5>
                         </span>
                     </a>
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
@@ -74,24 +74,30 @@
                                 </div>
                             </div>
                         </li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin') }}"
-                                aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
-                                    class="hide-menu">Dashboard</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/users') }}"
-                                aria-expanded="false"><i class="fa fa-users"></i><span
-                                    class="hide-menu">Users</span></a>
-                        </li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/products') }}"
-                                aria-expanded="false"><i class="fa fa-archive"></i><span
-                                    class="hide-menu">Products</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/transactions') }}"
-                                aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
-                                    class="hide-menu">transactions</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/cart') }}"
-                                aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
-                                    class="hide-menu">keranjang</span></a></li>
-                    <li class="sidebar-item"> <a class="sidebar-link bg-primary" href="{{ url('/products') }}"
-                                aria-expanded="false"><span class="hide-menu mx-auto text-white"><h4 class="mt-2">Belanja yuk</h4></span></a></li>
+                        @if (auth()->user()->roles == "ADMIN")
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin') }}"
+                            aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/users') }}"
+                                    aria-expanded="false"><i class="fa fa-users"></i><span
+                                        class="hide-menu">Users</span></a>
+                            </li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/products') }}"
+                                    aria-expanded="false"><i class="fa fa-archive"></i><span
+                                        class="hide-menu">Products</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/transactions') }}"
+                                    aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
+                                        class="hide-menu">transactions</span></a></li>
+                        @else
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin') }}"
+                            aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
+                                class="hide-menu">Dashboard</span></a></li>
+                                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('admin/cart') }}"
+                                    aria-expanded="false"><i class="fa fa-shopping-cart"></i><span
+                                        class="hide-menu">keranjang</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link bg-primary" href="{{ url('/products') }}"
+                                    aria-expanded="false"><span class="hide-menu mx-auto text-white"><h4 class="mt-2">Belanja yuk</h4></span></a></li>
+                        @endif
                     </ul>
                 </nav>
             </div>
